@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 720" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif">
+  <style>
+    .box   { fill:#eef2ff; stroke:#4f46e5; stroke-width:2; rx:10; }
+    .skill { fill:#ecfdf5; stroke:#059669; stroke-width:2; }
+    .gate  { fill:#fff7ed; stroke:#ea580c; stroke-width:2; }
+    .tool  { fill:#f1f5f9; stroke:#64748b; stroke-width:2; }
+    .lbl   { fill:#0f172a; font-size:15px; font-weight:600; }
+    .sub   { fill:#334155; font-size:12px; }
+    .edge  { stroke:#94a3b8; stroke-width:2; fill:none; marker-end:url(#a); }
+    .note  { fill:#64748b; font-size:12px; font-style:italic; }
+    @media (prefers-color-scheme: dark) {
+      .box{fill:#1e1b4b;stroke:#818cf8} .skill{fill:#052e2b;stroke:#34d399}
+      .gate{fill:#3b1d06;stroke:#fb923c} .tool{fill:#1e293b;stroke:#94a3b8}
+      .lbl{fill:#f1f5f9} .sub{fill:#cbd5e1} .note{fill:#94a3b8}
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <text x="450" y="30" text-anchor="middle" class="lbl" font-size="19">Second Thought — agent architecture</text>
+  <text x="450" y="50" text-anchor="middle" class="note">One Coordinator + a library of Agent Skills. Floor = deterministic (runs offline); ceiling = LLM (with a key).</text>
+
+  <!-- User goal -->
+  <rect class="box" x="360" y="70" width="180" height="46" rx="10"/>
+  <text x="450" y="92" text-anchor="middle" class="lbl">User goal</text>
+  <text x="450" y="108" text-anchor="middle" class="sub">"should I take aspirin?"</text>
+
+  <!-- Coordinator -->
+  <rect class="box" x="330" y="146" width="240" height="52" rx="10"/>
+  <text x="450" y="168" text-anchor="middle" class="lbl">Coordinator (orchestrator)</text>
+  <text x="450" y="186" text-anchor="middle" class="sub">classify: purchase | salary | medication | meals</text>
+
+  <!-- Context gathering -->
+  <rect class="skill" x="300" y="228" width="300" height="60" rx="10"/>
+  <text x="450" y="250" text-anchor="middle" class="lbl">Context Gathering skill</text>
+  <text x="450" y="268" text-anchor="middle" class="sub">floor: required-field interview (deterministic)</text>
+  <text x="450" y="282" text-anchor="middle" class="sub">ceiling: LLM adds ≤2 "deepening" probes</text>
+
+  <!-- Domain skill -->
+  <rect class="skill" x="300" y="318" width="300" height="56" rx="10"/>
+  <text x="450" y="340" text-anchor="middle" class="lbl">Domain skill (purchase | salary | medication | meals)</text>
+  <text x="450" y="358" text-anchor="middle" class="sub">produces a draft; calls MCP tools →</text>
+
+  <!-- MCP tools -->
+  <rect class="tool" x="650" y="312" width="220" height="68" rx="10"/>
+  <text x="760" y="332" text-anchor="middle" class="lbl" font-size="13">MCP server (stdio)</text>
+  <text x="760" y="348" text-anchor="middle" class="sub">affordability · budget_allocator</text>
+  <text x="760" y="362" text-anchor="middle" class="sub">product_price · drug_interaction</text>
+  <text x="760" y="376" text-anchor="middle" class="sub">nutrition_lookup</text>
+
+  <!-- Critic -->
+  <rect class="skill" x="300" y="404" width="300" height="60" rx="10"/>
+  <text x="450" y="426" text-anchor="middle" class="lbl">Critic skill</text>
+  <text x="450" y="444" text-anchor="middle" class="sub">floor: domain check() vs your stated facts</text>
+  <text x="450" y="458" text-anchor="middle" class="sub">ceiling: LLM catches subtler conflicts</text>
+
+  <!-- Re-analyze loop -->
+  <rect class="gate" x="640" y="410" width="230" height="48" rx="10"/>
+  <text x="755" y="430" text-anchor="middle" class="lbl" font-size="13">Re-analyze (×1)</text>
+  <text x="755" y="447" text-anchor="middle" class="sub">rejected → corrected draft</text>
+
+  <!-- HITL gate -->
+  <rect class="gate" x="300" y="494" width="300" height="48" rx="10"/>
+  <text x="450" y="514" text-anchor="middle" class="lbl">Human confirmation gate</text>
+  <text x="450" y="531" text-anchor="middle" class="sub">sensitive domains: salary, medication, meals</text>
+
+  <!-- Report -->
+  <rect class="box" x="300" y="572" width="300" height="58" rx="10"/>
+  <text x="450" y="594" text-anchor="middle" class="lbl">Decision Report</text>
+  <text x="450" y="612" text-anchor="middle" class="sub">recommendation · withdrawn "first take" · value</text>
+  <text x="450" y="626" text-anchor="middle" class="sub">assembled deterministically (never model-written)</text>
+
+  <text x="450" y="662" text-anchor="middle" class="note">Security throughout: no-network mock mode · in-session-only memory · redacted audit log (see SECURITY.md)</text>
+
+  <!-- edges -->
+  <path class="edge" d="M450 116 V146"/>
+  <path class="edge" d="M450 198 V228"/>
+  <path class="edge" d="M450 288 V318"/>
+  <path class="edge" d="M600 346 H650"/>
+  <path class="edge" d="M450 374 V404"/>
+  <path class="edge" d="M600 434 H640"/>
+  <path class="edge" d="M755 458 V474 H450 V494" stroke-dasharray="5 4"/>
+  <path class="edge" d="M450 464 V494"/>
+  <path class="edge" d="M450 542 V572"/>
+</svg>
