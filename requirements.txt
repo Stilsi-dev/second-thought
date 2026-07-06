@@ -1,0 +1,7 @@
+google-genai>=0.3.0
+mcp>=1.0.0
+streamlit>=1.38.0
+python-dotenv>=1.0.1
+pydantic>=2.7.0
+pyyaml>=6.0.1
+pytest>=8.0.0
