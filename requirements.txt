@@ -1,4 +1,8 @@
-google-genai>=0.3.0
+# Runtime deps for the Streamlit app, the MCP server/client, and the tests.
+# This is what Streamlit Community Cloud installs on deploy — kept lean on
+# purpose. The ADK path (adk_app/) has its own heavier deps: see
+# requirements-adk.txt.
+google-genai>=1.0.0
 mcp>=1.0.0
 streamlit>=1.38.0
 python-dotenv>=1.0.1

@@ -148,6 +148,10 @@ cp .env.example .env           # then set GEMINI_API_KEY (optional — see below
 streamlit run app.py
 ```
 
+Want the Google ADK entrypoint too (`adk web` / `adk run adk_app`)? Install the
+extra deps on top: `pip install -r requirements-adk.txt`. It's kept separate so
+the Streamlit Cloud deploy stays lean — `app.py` never imports ADK.
+
 **No API key?** It still runs. `MOCK_MODE` kicks in automatically: the agent
 loop, MCP tool calls, skill sequencing, and the confirmation gate all still
 execute — only the natural-language phrasing and recommendation text fall
@@ -158,6 +162,23 @@ Run the smoke tests (no API key required):
 ```bash
 python -m pytest tests/ -v
 ```
+
+## Deploy (Streamlit Community Cloud)
+
+The app deploys as-is with **no secrets** — it runs in `MOCK_MODE`, so the
+public demo is always-on, deterministic, and never hits an API quota:
+
+1. Push to a public GitHub repo (this one).
+2. Go to [share.streamlit.io](https://share.streamlit.io) → **New app** → sign in
+   with GitHub.
+3. Pick this repo, branch `main`, main file `app.py`.
+4. Under **Advanced settings**, set Python to **3.12** (not 3.14).
+5. Deploy. Streamlit Cloud installs `requirements.txt` (lean — no ADK) and
+   serves a public URL.
+
+To run the deployed app in **live mode** instead of mock, add `GEMINI_API_KEY`
+under the app's **Settings → Secrets** (it is exposed to the app as an env var).
+Mock mode is recommended for the public demo — no key, no rate limits.
 
 ## Project structure
 

@@ -1,0 +1,6 @@
+# Extra deps for the Google ADK entrypoint (adk_app/). Install on top of the
+# base runtime:  pip install -r requirements-adk.txt
+# Kept separate so the Streamlit Cloud deploy (requirements.txt) stays lean —
+# app.py never imports ADK; only `adk web` / `adk run adk_app` need this.
+-r requirements.txt
+google-adk>=2.3.0
