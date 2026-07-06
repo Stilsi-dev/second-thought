@@ -103,7 +103,9 @@ _Avoid_: rejected, discarded, old draft.
 
 **Sensitive domain**:
 A Domain whose output is gated behind explicit human confirmation before the
-Report is finalized. Currently `salary`.
+Report is finalized. Currently `salary`, `medication`, and `meals` (the three
+domains carrying financial or health stakes); `purchase` is the only
+non-sensitive Domain.
 _Avoid_: private, protected, secure.
 
 ## Example dialogue

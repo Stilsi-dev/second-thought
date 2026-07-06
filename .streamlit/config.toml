@@ -1,0 +1,10 @@
+# Composed, unhurried theme (PRODUCT.md: rigorous, honest, unhurried).
+# Light, low-chroma, one considered indigo accent — the opposite of a salesy
+# chatbot. Committed so the deployed app inherits it (secrets.toml stays ignored).
+[theme]
+base = "light"
+primaryColor = "#4457b3"            # considered slate-indigo — actions + selection only
+backgroundColor = "#f6f7f9"         # cool near-white (chroma toward blue, not warm cream)
+secondaryBackgroundColor = "#eceff4" # cooler panel neutral for sidebar/surfaces
+textColor = "#1b2230"               # near-black ink, high contrast
+font = "sans serif"
