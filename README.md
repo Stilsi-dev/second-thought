@@ -100,6 +100,20 @@ After the report, you can push back. `orchestrator.challenge()` distinguishes
 This closes the anti-sycophancy loop — the agent argues with *itself*, and also
 refuses to fold when *you* lean on it.
 
+## Course concepts → where to find them (for judges)
+
+The rubric asks for at least three course concepts. This repo demonstrates all
+six — here's the exact location of each, mirroring the rubric's own checklist.
+
+| Rubric concept | Where | In this repo |
+|---|---|---|
+| **Agent / Multi-agent system (ADK)** | Code | `adk_app/agent.py` — a Google ADK coordinator with four domain sub-agents, delegating over the same MCP server (`adk web` / `adk run adk_app`). The hand-written coordinator lives in `decision_concierge/orchestrator.py`. |
+| **MCP Server** | Code | `decision_concierge/mcp_server/server.py` — a real `FastMCP` stdio server exposing five tools; `mcp_client.py` calls it (with an in-process fallback). |
+| **Agent Skills** | Code | `decision_concierge/skills/*/` — each skill is a folder with a `SKILL.md` (frontmatter + system-instruction body) and `skill.py`; `skills/__init__.py` is the registry (progressive disclosure). |
+| **Security features** | Code | `decision_concierge/security.py` — sensitive-domain human-confirmation gate + redacted audit log (raw income/meds never hit disk). |
+| **Antigravity** | Video | Built agent-first in Google Antigravity (video scene S7). |
+| **Deployability** | Video | Live, public, no login: **second-thought.streamlit.app** — reproduce via the `## Deploy` section below. |
+
 ## How this maps to the 5-day course
 
 | Day | Concept | Where |
