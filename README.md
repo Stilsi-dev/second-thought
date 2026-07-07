@@ -126,9 +126,6 @@ six — here's the exact location of each, mirroring the rubric's own checklist.
 
 At least 3 concepts required by the rubric — this hits all 5 by design, not padding.
 
-Condensed notes on all five course days (and how each maps into this repo) live
-in [docs/COURSE_NOTES.md](docs/COURSE_NOTES.md).
-
 ## Why agents (not a single prompt)
 
 The Context Gathering skill can't know in advance whether it's interviewing
